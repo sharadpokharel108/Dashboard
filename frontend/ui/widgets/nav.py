@@ -1,11 +1,20 @@
 from PySide6.QtWidgets import QListWidget, QListWidgetItem
 from PySide6.QtGui import QIcon
+from ui.style.theme import Theme
+import os
 
-
-class Sidebar(QListWidget):
+class navbar(QListWidget):
     NORMAL_ICON_ROLE = 1000
     ACTIVE_ICON_ROLE = 1001
 
+    BASE_DIR = os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.abspath(__file__))
+        )
+    )
+
+    ICON_DIR = os.path.join(BASE_DIR, "resources", "nav_icons")
+    
     ICONS = {
         "Certificates": ("house.png", "house (1).png"),
         "Authorities": ("mail.png", "mail (1).png"),
@@ -19,31 +28,30 @@ class Sidebar(QListWidget):
 
         self.setFixedWidth(220)
 
-        self.setStyleSheet("""
-        QListWidget {
-            background: #1f2937;
+        self.setStyleSheet(f"""
+        QListWidget {{
+            background: {Theme.side_bar_background};
             border: none;
-            color: white;
-        }
+            color: {Theme.secondary};
+            font-family: {Theme.body_family};
+            font-size: 17px;
+            font-weight: 500;
+        }}
 
-        /* normal item */
-        QListWidget::item {
+        QListWidget::item {{
             height: 40px;
             padding-left: 10px;
-        }
+        }}
 
-        /* hover background + text color change */
-        QListWidget::item:hover {
+        QListWidget::item:hover {{
             background: #2b3a4a;
-            color: #4da3ff;
-        }
+        }}
 
-        /* selected item */
-        QListWidget::item:selected {
-            background: #2b3a4a;
+        QListWidget::item:selected {{
+            background: #1f2a3c;
             border-left: 3px solid #4da3ff;
-            color: #4da3ff;
-        }
+            color: {Theme.primary};
+        }}
         """)
 
         self._create_items()
@@ -55,10 +63,13 @@ class Sidebar(QListWidget):
     def _create_items(self):
         for text, (normal_icon, active_icon) in self.ICONS.items():
             item = QListWidgetItem(text)
+            
+            normal_path = os.path.join(self.ICON_DIR, normal_icon)
+            active_path = os.path.join(self.ICON_DIR, active_icon)
 
             item.setIcon(QIcon(normal_icon))
-            item.setData(self.NORMAL_ICON_ROLE, normal_icon)
-            item.setData(self.ACTIVE_ICON_ROLE, active_icon)
+            item.setData(self.NORMAL_ICON_ROLE, normal_path)
+            item.setData(self.ACTIVE_ICON_ROLE, active_path)
 
             self.addItem(item)
 
