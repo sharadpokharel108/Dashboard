@@ -27,6 +27,7 @@ class navbar(QListWidget):
         super().__init__(parent)
 
         self.setFixedWidth(220)
+        self.setSpacing(10)
 
         self.setStyleSheet(f"""
         QListWidget {{

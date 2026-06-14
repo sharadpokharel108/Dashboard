@@ -3,6 +3,7 @@ from ui.style.labels import headline_label1,headline_label2
 from ui.style.theme import Theme as t
 from ui.widgets.nav import navbar
 from ui.widgets.nav_button import make_nav_button
+from PySide6.QtGui import QIcon
 
 class Sidebar(QWidget):
     def __init__(self):
@@ -44,11 +45,18 @@ class Sidebar(QWidget):
                     border-color: #1d4ed8;
                 }}
                 """)
+        
+        self.alerts_btn = make_nav_button("Alerts", QIcon("icons/warning.png"))
+        self.logs_btn = make_nav_button("Logs", QIcon("icons/log.png"))
                         
     
     def add_widgets(self):
-        self.main_layout.addWidget(self.heading1)
-        self.main_layout.addWidget(self.heading2)
-        self.main_layout.addWidget(self.nav_bar)
-        self.main_layout.addWidget(self.new_certificate)
-        self.main_layout.addStretch()
+        self.main_layout.addWidget(self.heading1, stretch=2)
+        self.main_layout.addWidget(self.heading2, stretch=2)
+        self.main_layout.addStretch(stretch=20)
+
+        self.main_layout.addWidget(self.nav_bar,stretch=80)
+        self.main_layout.addStretch(stretch=50)
+        self.main_layout.addWidget(self.new_certificate,stretch=2)
+        self.main_layout.addWidget(self.alerts_btn,stretch=2)
+        self.main_layout.addWidget(self.logs_btn,stretch=2)
