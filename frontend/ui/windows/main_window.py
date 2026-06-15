@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 from ui.style.theme import Theme as t
 
-from ui.widgets.sidebar import Sidebar
+from ui.widgets.sidebar.sidebar import Sidebar
 from ui.widgets.content import Contentbar
 class Mainwindow(QWidget):
     def __init__(self):

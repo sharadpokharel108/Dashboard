@@ -1,8 +1,8 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QPushButton
 from ui.style.labels import headline_label1,headline_label2
 from ui.style.theme import Theme as t
-from ui.widgets.nav import navbar
-from ui.widgets.nav_button import make_nav_button
+from ui.widgets.sidebar.nav import navbar
+from ui.widgets.sidebar.nav_button import make_nav_button
 from PySide6.QtGui import QIcon
 
 class Sidebar(QWidget):
